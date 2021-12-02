@@ -16,15 +16,12 @@ jobs:
           java-version: '11'
           distribution: 'adopt'
       - run: mvn --batch-mode --update-snapshots verify
-      - uses: actions/upload-artifact@v2
-        with:
-          name: Package
-          path: staging
-      - name: 'Upload .jar'
+      - name: Upload a Build Artifact
         uses: actions/upload-artifact@v2.2.4
         with:
-          name: jar
+          name: app.jar
           path: ./target/*.jar
+          if-no-files-found: error
   
   release-content:
     name: 'Create GitHub Release'
